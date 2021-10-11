@@ -36,3 +36,18 @@ for line in file:
       result["requests_per_day"][date[0]]+=1
     else:
       result["requests_per_day"][date[0]]=0
+    
+    if week in result["requests_per_week"]:
+      result["requests_per_week"][week] += 1
+    else:
+      result["requests_per_week"][week] = 0
+    month = date[0][3::]
+    if month not in months_done:
+      file_name = month[:3:]+month[4::]
+      if(len(file_name))==7:
+        month_file = open(month[:3:]+month[4::]+".txt",'w')
+        print(file_name)
+      months_done.append(month)
+    month_file.write(line)
+    if month in result["requests_per_month"]:
+      result["requests_per_month"][month]+=1
