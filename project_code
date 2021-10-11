@@ -1,0 +1,19 @@
+import requests
+url = "https://s3.amazonaws.com/tcmg476/http_access_log"
+file_url = "https://s3.amazonaws.com/tcmg476/http_access_log"
+r = requests.get(file_url, stream = True)
+with open("info.txt", "wb") as textfile:
+  for chunk in r.iter_content(chunk_size=1024):
+    if chunk:
+      textfile.write(chunk)
+result={
+  "total_requests":0,
+  "requests_per_day":{},
+  "requests_per_week":{},
+  "requests_per_month":{},
+  "request_not_successful":0,
+  "request_redirected":0,
+  "request_frequency":{},
+  "most_requested_file":[0,[]],
+  "least_requested_file":[0,[]]
+  }
