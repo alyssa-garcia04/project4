@@ -17,3 +17,22 @@ result={
   "most_requested_file":[0,[]],
   "least_requested_file":[0,[]]
   }
+file = open("info.txt")
+date_day = None
+days = 0
+week = None
+months_done = []
+for line in file:
+  if(len(line)>=56):
+    result["total_requests"]+=1
+    data=line.split()
+    date = data[3][1::].split(':')
+    if not (date_day == date[0]):
+      date_day = date[0]
+      days += 1
+      if(days%7 == 0):
+        week = date_day
+    if date[0] in result["requests_per_day"]:
+      result["requests_per_day"][date[0]]+=1
+    else:
+      result["requests_per_day"][date[0]]=0
